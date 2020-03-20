@@ -21,7 +21,7 @@ int hashf(char word[]){
    m = 10000;
    int ps[10] = {10007, 10009, 10037, 10039, 10061, 10067, 10069, 10079, 10091, 10093};
 
-   p = 1007;
+   p = 10007;
    int r = rand();
    x = 11 + r%(32-11);
 
@@ -62,14 +62,15 @@ int printStruct(void * ap){
    printf("\nhash: %i", data->hash);
 }
 
-int loadFile(FILE *fp, ){
+//int loadFile(FILE *fp, ){
 
-}
+//}
 
 int main(){
    struct petType *Sultan;
 
-   void *table[10000];
+   void *namet[10000];
+   void *idt[10000];
 
    srand(666);
 
