@@ -47,34 +47,6 @@ int idgiver(char id[5], int n){
    return 0;
 }
 
-int loadStruct(void *ap, int n){
-   struct petType *data;
-   data = ap;
-   char id[5];
-   idgiver(id,n);
-   sprintf(data->id,id);
-   printf("Nombre: ");
-   scanf(" %s", data->nombre);
-   printf("Tipo: ");
-   scanf(" %s", data->tipo);
-   printf("Edad: ");
-   scanf(" %i", &data->edad);
-   printf("Raza: ");
-   scanf(" %s", data->raza);
-   printf("Estatura: ");
-   scanf(" %i", &data->estatura);
-   printf("Peso: ");
-   scanf(" %f", &data->peso);
-   printf("Sexo: ");
-   scanf(" %c", &data->sexo);
-   data->idhash = hashf(data->id,5);
-   data->namehash = hashf(data->nombre,sizeof(data->nombre));
-   data->idnext = NULL;
-   data->namenext = NULL;
-
-   return 0;
-}
-
 int ingresarRegistro(int n, void* namet[], void* idt[]){
    int r;
 

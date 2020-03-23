@@ -1,4 +1,9 @@
 {
     "liveshare.account": "",
-    "liveshare.accountProvider": ""
+    "liveshare.accountProvider": "",
+    "files.associations": {
+        "general.h": "c",
+        "stdio.h": "c",
+        "stdbool.h": "c"
+    }
 }
