@@ -11,7 +11,7 @@ int main(){
         dir = malloc(15);
         char num[3];
         sprintf(num, "%i", i);
-        strcat(dir,"./hash/");
+        strcat(dir,"../hash/");
         strcat(dir,num);
         FILE *fp;
         fp = fopen(dir,"w+");

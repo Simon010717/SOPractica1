@@ -5,8 +5,8 @@
 int main(){
     int opcion,r;
     
-    printf("------------Veterinaria La Perra de Juano\n\n------------");
-    printf("Menú de opciones: \n");
+    printf("------------Veterinaria Juano------------\n\n");
+    printf("Opciones: \n");
     printf("    1. Ingresar Registro");
     printf("\n\n");
     printf("Digite su opción: ");
