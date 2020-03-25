@@ -6,7 +6,7 @@ int verificacion(int id, int size){
     int f,tid;
     f = 0;
     FILE *fp;
-    fp = fopen("../data.dat","r");
+    fp = fopen("./dataDogs.dat","r");
     while(!f && ftell(fp)<(size*100)){
         //printf("%li\n",ftell(fp));
         fread(&tid,sizeof(int),1,fp);
@@ -21,7 +21,7 @@ int verificacion(int id, int size){
 int verRegistro(){
     int size,id,v;
     FILE *fp;
-    fp = fopen("../data.dat","a");
+    fp = fopen("./dataDogs.dat","a");
     fseek(fp, 0L, SEEK_END);
     size = (int)(ftell(fp)/100);
     fclose(fp);
@@ -71,12 +71,6 @@ int verRegistro(){
     //printf("%s\n",com);
 
     system(com);
-
-    return 0;
-}
-
-int main(){
-    verRegistro();
 
     return 0;
 }

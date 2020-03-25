@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+#include "general.h"
+/*
 int hashf(char word[],int l){
     int m,h,i,x,p;
     m = 1000;
-    int ps[10] = {10007, 10009, 10037, 10039, 10061, 10067, 10069, 10079, 10091, 10093};
 
     p = 10007;
-    int r = rand();
     x = 22;
 
     for(i=0;i<l;i++){
@@ -22,7 +21,7 @@ int hashf(char word[],int l){
     }
 
     return h%m;
-}
+}*/
 
 int buscarRegistro(){
     int hash,size,fs,tid,l,i;
@@ -41,7 +40,7 @@ int buscarRegistro(){
     dir = malloc(15);
     bzero(dir,15);
     char num[3];
-    strcat(dir,"../hash/");
+    strcat(dir,"./hash/");
     sprintf(num,"%i",hash);
     strcat(dir,num);
 
@@ -66,9 +65,4 @@ int buscarRegistro(){
     }
 
     return 0;
-}
-
-int main(){
-    buscarRegistro();
-    return 0;    
 }

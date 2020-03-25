@@ -54,7 +54,7 @@ int ingresarRegistro(){
    //printf("%s\n",dir);
 
    FILE *fp;
-   fp = fopen(dir,"r");
+   fp = fopen(dir,"a");
    fseek(fp, 0L, SEEK_END);
    size = ftell(fp);
    //printf("size %i\n",size);
@@ -70,7 +70,7 @@ int ingresarRegistro(){
 
    fclose(fp);
    
-   fp = fopen("data.dat","a");
+   fp = fopen("dataDogs.dat","a");
    
    if(fp==NULL){perror("error fopen");exit(-1);}
 

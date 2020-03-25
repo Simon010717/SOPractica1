@@ -19,6 +19,7 @@ void readFile(FILE* file, char* AllNames[]){
             fread(a,1,1,file);
             i++;
         }while(*a != '\n'  && i<SIZE);
+        *a = '\0';
     }
         
 }
@@ -64,7 +65,8 @@ int main(int argc, char* argv[]){
         PerroStruct.peso = Pesos[rand()%2];
         PerroStruct.estatura = Estaturas[rand()%8];
 
-        hash = hashf(PerroStruct.nombre,sizeof(PerroStruct.nombre));
+        printf("%s",PerroStruct.nombre);
+        hash = hashf(PerroStruct.nombre,32);
 
         char* dir;
         dir = malloc(15);
@@ -79,7 +81,7 @@ int main(int argc, char* argv[]){
         //printf("%s\n",dir);
 
         FILE *fp;
-        fp = fopen(dir,"r");
+        fp = fopen(dir,"a");
         fseek(fp, 0L, SEEK_END);
         size = ftell(fp);
         //printf("size %i\n",size);
