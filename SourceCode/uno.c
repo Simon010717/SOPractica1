@@ -8,6 +8,7 @@ int loadStruct(void *ap){
    struct petType *data;
    data = ap;
    printf("Nombre: ");
+   bzero(data->nombre,32);
    scanf(" %s", data->nombre);
    printf("Tipo: ");
    scanf(" %s", data->tipo);
@@ -34,9 +35,9 @@ int ingresarRegistro(){
 
    r = loadStruct(data);
 
-   //printf("%i\n",r);
+   //printf("len nombre %i\n",(int)sizeof(*data->nombre));
 
-   hash = hashf(data->nombre,sizeof(*data->nombre));
+   hash = hashf(data->nombre,32);
 
    //printf("%i\n",hash);
 

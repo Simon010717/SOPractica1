@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 
 int hashf(char word[],int l){
     int m,h,i,x,p;
@@ -12,6 +13,10 @@ int hashf(char word[],int l){
     p = 10007;
     int r = rand();
     x = 22;
+
+    for(i=0;i<l;i++){
+        word[i] = tolower(word[i]);
+    }
 
     h = 1;
     for(i=0; i<l; i++){
