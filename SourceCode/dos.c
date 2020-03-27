@@ -25,18 +25,7 @@ int verRegistro(){
     fseek(fp, 0L, SEEK_END);
     size = (int)(ftell(fp)/100);
     fclose(fp);
-/*
-    int f,tid;
-    f = 0;
-    fp = fopen("../data.dat","r");
-    while(!f && ftell(fp)<(size*100)){
-        //printf("%li\n",ftell(fp));
-        fread(&tid,sizeof(int),1,fp);
-        printf("- %i\n",tid);
-        fseek(fp,100-sizeof(int),SEEK_CUR);
-    }
-    fclose(fp);
-*/
+
     printf("Número de registros actuales: %i\nIngrese ID: ",size);
     
     //printf("ID: ");
@@ -51,9 +40,7 @@ int verRegistro(){
     bzero(dir,25);
     char num[8];
     strcat(dir,"./historias/");
-    //printf("%s\n",dir);
     sprintf(num,"%i",id);
-    //printf("%s\n",num);
     strcat(dir,num);
     strcat(dir,".txt");
 

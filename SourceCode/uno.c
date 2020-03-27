@@ -35,34 +35,25 @@ int ingresarRegistro(){
 
    r = loadStruct(data);
 
-   //printf("len nombre %i\n",(int)sizeof(*data->nombre));
-
    hash = hashf(data->nombre,32);
-
-   //printf("%i\n",hash);
 
    char* dir;
    dir = malloc(15);
    bzero(dir,15);
    char num[3];
    strcat(dir,"./hash/");
-   //printf("%s\n",dir);
    sprintf(num,"%i",hash);
-   //printf("%s\n",num);
    strcat(dir,num);
 
-   //printf("%s\n",dir);
 
    FILE *fp;
    fp = fopen(dir,"a");
    fseek(fp, 0L, SEEK_END);
    size = ftell(fp);
-   //printf("size %i\n",size);
    fclose(fp);
 
    id = 1000*(int)(size/36)+hash;
    data->id = id;
-   //printf("id %i\n",id);
 
    fp = fopen(dir,"a");
    fwrite(&id,sizeof(int),1,fp);
