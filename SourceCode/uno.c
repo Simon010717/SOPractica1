@@ -1,27 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ncurses.h>
 
 #include "general.h"
 
 int loadStruct(void *ap){
-   struct petType *data;
+   struct dogType *data;
    data = ap;
-   printf("Nombre: ");
+   printw("Nombre: ");
    bzero(data->nombre,32);
-   scanf(" %s", data->nombre);
-   printf("Tipo: ");
-   scanf(" %s", data->tipo);
-   printf("Edad: ");
-   scanf(" %i", &data->edad);
-   printf("Raza: ");
-   scanf(" %s", data->raza);
-   printf("Estatura: ");
-   scanf(" %i", &data->estatura);
-   printf("Peso: ");
-   scanf(" %f", &data->peso);
-   printf("Sexo: ");
-   scanf(" %c", &data->sexo);
+   scanw(" %s", data->nombre);
+   printw("Tipo: ");
+   scanw(" %s", data->tipo);
+   printw("Edad: ");
+   scanw(" %i", &data->edad);
+   printw("Raza: ");
+   scanw(" %s", data->raza);
+   printw("Estatura: ");
+   scanw(" %i", &data->estatura);
+   printw("Peso: ");
+   scanw(" %f", &data->peso);
+   printw("Sexo: ");
+   scanw(" %c", &data->sexo);
 
    return 0;
 }
@@ -30,8 +31,8 @@ int ingresarRegistro(){
    int r,pos,id,hash,size;
    int *tempid;
 
-   struct petType *data;
-   data = malloc(sizeof(struct petType));
+   struct dogType *data;
+   data = malloc(sizeof(struct dogType));
 
    r = loadStruct(data);
 
@@ -65,11 +66,11 @@ int ingresarRegistro(){
    
    if(fp==NULL){perror("error fopen");exit(-1);}
 
-   r = fwrite(data,sizeof(struct petType),1,fp);
+   r = fwrite(data,sizeof(struct dogType),1,fp);
 
    fclose(fp);
 
-   printf("ID: %i. ",id);
+   printw("ID: %i. ",id);
    
    return 0;
 }
@@ -79,8 +80,8 @@ int main(){
    while(1){
       r = ingresarRegistro();
 
-      if(r!=0){printf("Registro fallido.\n");}
-      else{printf("Registro exitoso.\n");}  
+      if(r!=0){printw("Registro fallido.\n");}
+      else{printw("Registro exitoso.\n");}  
    }
    return 0;
 }*/

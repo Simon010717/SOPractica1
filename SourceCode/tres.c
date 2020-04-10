@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<strings.h>
 #include<string.h>
+#include <ncurses.h>
 
 
 int eliminarRegistro(){
@@ -13,9 +14,9 @@ int eliminarRegistro(){
     fp = fopen("./dataDogs.dat","a");
     total = ftell(fp)/100;
 
-    printf("Existen %i registros.\n",total);
-    printf("ID de estructura que desea eliminar: ");
-    scanf("%i",&id);
+    printw("Existen %i registros.\n",total);
+    printw("ID de estructura que desea eliminar: ");
+    scanw("%i",&id);
 
     fclose(fp);
  
@@ -59,7 +60,7 @@ int eliminarRegistro(){
     remove(dir);
     rename("./hash/temp", dir);
     if(!f) {
-        printf("No existe un registro con ese ID\n");
+        printw("No existe un registro con ese ID\n");
         return 0;
     }
     bzero(&tid,sizeof(int));
@@ -87,7 +88,7 @@ int eliminarRegistro(){
     free(c);
     free(m);
     
-    printf("Registro eliminado exitosamente\n");
+    printw("Registro eliminado exitosamente\n");
     remove("./dataDogs.dat");
     rename("./newdata.dat", "./dataDogs.dat");
     

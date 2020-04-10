@@ -2,39 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <ncurses.h>
 #include "general.h"
-/*
-int hashf(char word[],int l){
-    int m,h,i,x,p;
-    m = 1000;
-
-    p = 10007;
-    x = 22;
-
-    for(i=0;i<l;i++){
-        word[i] = tolower(word[i]);
-    }
-
-    h = 1;
-    for(i=0; i<l; i++){
-        h = (p + h*x+(int)word[i])%p;
-    }
-
-    return h%m;
-}*/
 
 int buscarRegistro(){
     int hash,size,fs,tid,l,i;
     char tnombre[32];
     char nombre[32];
     bzero(tnombre,32); bzero(nombre,32);
-    printf("Ingrese nombre a buscar: ");
-    scanf("%s",nombre);
+    printw("Ingrese nombre a buscar: ");
+    scanw("%s",nombre);
 
     for(i=0;i<32;i++){nombre[i] = tolower(nombre[i]);}
 
     hash = hashf(nombre,32);
-    printf("hash %i\n",hash);
+    printw("hash %i\n",hash);
 
     char* dir;
     dir = malloc(15);
@@ -48,17 +30,17 @@ int buscarRegistro(){
     fp = fopen(dir,"a");
     fseek(fp, 0L, SEEK_END);
     size = (int)(ftell(fp)/36);
-    printf("size %i\n",size);
+    printw("size %i\n",size);
     fclose(fp);
 
     fp = fopen(dir,"r");
-    printf("ID de registros con nombre \"%s\":\n",nombre);
+    printw("ID de registros con nombre \"%s\":\n",nombre);
     while(ftell(fp)<(size*36)){
         fread(&tid,4,1,fp);
         fread(tnombre,32,1,fp);
         for(i=0;i<32;i++){tnombre[i] = tolower(tnombre[i]);}
         if(strcmp(nombre,tnombre) == 0){
-            printf("   - %i\n",tid);    
+            printw("   - %i\n",tid);    
             fs++;
         }
         fseek(fp,36-sizeof(int)-32,SEEK_CUR);

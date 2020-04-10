@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-struct petType{
+struct dogType{
    int id;
    char nombre[32];
    char tipo[32];
