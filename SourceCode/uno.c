@@ -6,7 +6,7 @@
 #include "general.h"
 
 /*----------------- loadStruct --------------------------------
-   |  Funcion loadStruct
+   |  Funcion: loadStruct
    |
    |  Proposito: Carga los datos ingresados por el usuario a un apuntador dogType que se pasa como parametro. 
    |
