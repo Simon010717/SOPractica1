@@ -5,10 +5,20 @@
 
 #include "general.h"
 
+/*----------------- loadStruct --------------------------------
+   |  Funcion loadStruct
+   |
+   |  Proposito: Carga los datos ingresados por el usuario a un apuntador dogType que se pasa como parametro. 
+   |
+   |  Parametros:
+   |    ap (IN) -- Apuntador al lugar donde se quiere guardar la informacion leida.
+   |
+   |  Retorna:  0 si la operacion es exitosa.
+   -------------------------------------------------------------------/*/
 int loadStruct(void *ap){
-   struct dogType *data;
+   struct dogType *data;                                      // Declaracion de la estructura sobre el apuntador parametro
    data = ap;
-   printw("Nombre: ");
+   printw("Nombre: ");                                      // Lectura de cada dato y almacenamiento sobre la estructura declarada
    bzero(data->nombre,32);
    scanw(" %s", data->nombre);
    printw("Tipo: ");
@@ -27,61 +37,62 @@ int loadStruct(void *ap){
    return 0;
 }
 
+
+/*----------------- ingresarRegistro --------------------------------
+   |  Funcion ingresarRegistro
+   |
+   |  Proposito: Guarda la informacion ingresada por el usuario en el 
+   |  archivo dataDogs.dat e ingresa los datos a la tabla hash (que se
+   |  encuentra en la carpeta hash) 
+   |
+   |  Parametros:
+   |
+   |  Retorna:  0 si la operacion es exitosa.
+   -------------------------------------------------------------------/*/
 int ingresarRegistro(){
-   int r,pos,id,hash,size;
-   int *tempid;
+   int r,pos,id,hash,size;                                                   // Declaracion de variables enteros
+   int *tempid;                                                   // Declaracion del apuntador donde se guardara el id leido en la interacion de los archivos
 
-   struct dogType *data;
-   data = malloc(sizeof(struct dogType));
+   struct dogType *data;                                                   //Declaracion del apuntador a una estructura dogType donde se guardara la informacion ingresada
+   data = malloc(sizeof(struct dogType));                                                   // Reserva del espacio de memoria de la estuctura dogType
 
-   r = loadStruct(data);
+   r = loadStruct(data);                                                   // Llamada a la funcion que cargara la informacion ingresada al apuntador data
 
-   hash = hashf(data->nombre,32);
+   hash = hashf(data->nombre,32);                                                   // Llamada a la funcion hashf obteniendo el coidgo hash del nombre ingresado, que se encuentra en SourceCode/general.c
 
-   char* dir;
-   dir = malloc(15);
-   bzero(dir,15);
-   char num[3];
-   strcat(dir,"./hash/");
-   sprintf(num,"%i",hash);
-   strcat(dir,num);
+   char* dir;                                      // Arreglo de caracteres que contendra la direccion del archivo de la tabla hash donde se debera ingresar los datos
+   dir = malloc(15);                                       // Reserva del espacio de memoria para la direccion
+   bzero(dir,15);                                      // Limpieza del espacio de memoria de la direccion
+   char num[3];                                      // Arreglo de caracteres que contiene el codigo hash de la estructura
+   strcat(dir,"./hash/");                                      // Concatenacion de la cadena "./hash/" a dir
+   sprintf(num,"%i",hash);                                      // Conversion del numero entero hash a arreglo de caracteres (num)
+   strcat(dir,num);                                      // Concatenacion del numero (num) a dir. Ahora dir contiene la direccion del archivo hash correspondiente
 
 
-   FILE *fp;
-   fp = fopen(dir,"a");
-   fseek(fp, 0L, SEEK_END);
-   size = ftell(fp);
-   fclose(fp);
+   FILE *fp;                                      // Declaracion del apuntador del archivo de la entrada a la tabla hash
+   fp = fopen(dir,"a");                                      // Apertura del archivo hash "a" (para escritura al final del archivo) 
+   size = ftell(fp);                                      // Se guarda en la variable size la posicion en Bytes del apuntador interno del archivo. Esto nos permite saber el tamaño del archivo en Bytes.
+   fclose(fp);                                      // Cierre del archivo
 
-   id = 1000*(int)(size/36)+hash;
-   data->id = id;
+   id = 1000*(int)(size/36)+hash;                                      // Sabiendo el tamaño del archivo de esa entrada hash especifica, podemos calcular un id unico almaceando en la variable id
+   data->id = id;                                      // Se almacena este id en la estructura dogType donde ya se ha almecenado los datos ingresados
 
-   fp = fopen(dir,"a");
-   fwrite(&id,sizeof(int),1,fp);
-   fwrite(data->nombre,32,1,fp);
+   fp = fopen(dir,"a");                                      // Apertura del documento hash con argumento "a" para escribir al final del fichero
+   fwrite(&id,sizeof(int),1,fp);                                      // Escritura del id de la estructura
+   fwrite(data->nombre,32,1,fp);                                      // Escritura del nombre ingresado
 
-   fclose(fp);
+   fclose(fp);                                      // Cierre del archivo
    
-   fp = fopen("dataDogs.dat","a");
-   
-   if(fp==NULL){perror("error fopen");exit(-1);}
+   fp = fopen("dataDogs.dat","a");                                      // Apertura del archivo dataDogs.dat con argumento "a" para esciribr al final del fichero
 
-   r = fwrite(data,sizeof(struct dogType),1,fp);
+   r = fwrite(data,sizeof(struct dogType),1,fp);                                      // Escritura al final del archivo de la estructura entera con todos los datos ingresados
 
-   fclose(fp);
+   fclose(fp);                                      // Cierre del archivo
 
-   printw("ID: %i. ",id);
+   free(data);                                      // Liberacion de la memoria reservada en data (estructura donde se guardaron los datos)
+   free(dir);                                      // Liberacion de la memoria reservada en dir (arreglo que contenia la direccion del archivo hash)
+
+   printw("ID: %i. ",id);                                      // Impresion del ID con el que se guardo la informacion ingresada
    
    return 0;
 }
-/*
-int main(){
-   int r;
-   while(1){
-      r = ingresarRegistro();
-
-      if(r!=0){printw("Registro fallido.\n");}
-      else{printw("Registro exitoso.\n");}  
-   }
-   return 0;
-}*/

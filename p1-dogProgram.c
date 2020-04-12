@@ -11,25 +11,25 @@
 #include "cuatro.h"
 
 
-void pressToContinue(){
-    printw("\nPulse cualquier tecla para continuar...\n");                        // Espera por una tecla para continuar.
+void keyToContinue(){                                                             // Funcion que espera a que el usario presione cualquier tecla para continuar
+    printw("\nPulse cualquier tecla para continuar...\n");                        // Imprime el mensaje
     noecho();                                                                     // Impide que se muestre el caracter en consola.
-    getch();                                                                      // Obtiene el caracter.
+    getch();                                                                      // Espera y obtiene el caracter.
     echo();                                                                       // Permite de nuevo el ingreso de caracteres.    
-    clear();                                                               
+    clear();                                                                      // Limpia la consola
 }
 
 
 int main(){
-    initscr();
-    clear();
-    refresh();
+    initscr();                                                                   // Se incia la consola 
+    clear();                                                                     // Se limpia la consola
+    refresh();                                                                   // Se actualiza la consola
 
-    while(1){
+    while(1){                                                                    //Ciclo continuo del menú
         
-        int opcion,r;
+        int opcion,r;                                                            // Declaracion de las variables
     
-        printw("------------Veterinaria Juano's------------\n\n");
+        printw("------------Veterinaria Juano's------------\n\n");               // Impresion del menú
         printw("Opciones: \n");
         printw("    1. Ingresar Registro\n");
         printw("    2. Ver Registro\n");
@@ -39,12 +39,12 @@ int main(){
         printw("\n\n");
         printw("Digite su opción: ");
 
-        scanw("%i", &opcion);
+        scanw("%i", &opcion);                                                    // Lee la opcion ingresada
 
-        switch (opcion)
+        switch (opcion)                                                          // Seleccion de la funcion se gun la opcion ingresada
         {
         case 1:
-            r = ingresarRegistro();
+            r = ingresarRegistro();                                              // Ejecuta la función de Ingreso que se encuentra en SourceCode/uno.c
 
             if (r!=0) {printw("Registro fallido.\n");}
             else {printw("Registro exitoso.\n");} 
@@ -63,14 +63,15 @@ int main(){
             break;
         
         case 5:
+            printw("Gracias.\n");
             break;
         
         default:
-            printw("\n");
+            printw("Opcion invalida.\n");
         }
 
-        pressToContinue();
-        
+        keyToContinue();
+
     }
     clear(); 
     endwin();
