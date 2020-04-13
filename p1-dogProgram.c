@@ -1,3 +1,8 @@
+/*
+ * Autores: Simon Aparicio, Juan Gonzalez, Samuel Gonzalez
+ * Lenguaje:  C
+ */
+
 #include <stdio.h>
 #include <ncurses.h>
 #include <curses.h>
@@ -11,6 +16,7 @@
 #include "cuatro.h"
 
 
+
 void keyToContinue(){                                                             // Funcion que espera a que el usario presione cualquier tecla para continuar
     printw("\nPulse cualquier tecla para continuar...\n");                        // Imprime el mensaje
     noecho();                                                                     // Impide que se muestre el caracter en consola.
@@ -21,11 +27,13 @@ void keyToContinue(){                                                           
 
 
 int main(){
+
+    int w = 1;
     initscr();                                                                   // Se incia la consola 
     clear();                                                                     // Se limpia la consola
     refresh();                                                                   // Se actualiza la consola
 
-    while(1){                                                                    //Ciclo continuo del menú
+    while(w){                                                                    //Ciclo continuo del menú
         
         int opcion,r;                                                            // Declaracion de las variables
     
@@ -51,23 +59,24 @@ int main(){
             break;
 
         case 2:
-            r = verRegistro();
+            r = verRegistro();                                                   // Ejecuta la función de verRegistro que se encuentra en SourceCode/dos.c
             break;
 
         case 3:
-            r = eliminarRegistro();
+            r = eliminarRegistro();                                              // Ejecuta la función de eliminarRegistro que se encuentra en SourceCode/tres.c
             break;
 
         case 4:
-            r = buscarRegistro();
+            r = buscarRegistro();                                                // Ejecuta la función de verRegistro que se encuentra en SourceCode/dos.c
             break;
         
         case 5:
-            printw("Gracias.\n");
+            printw("Gracias.\n");                                                //Imprime gracias y termina el programa.
+            w = 0;
             break;
         
         default:
-            printw("Opcion invalida.\n");
+            printw("Opcion invalida.\n");                                        //Imprime el mensaje.
         }
 
         keyToContinue();
