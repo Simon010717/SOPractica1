@@ -33,8 +33,8 @@ int eliminarRegistro(){
     hash = id % 1000;                                     // Guardamos en la variable hash el codigo hash de la estructura aplicandole modulo mil a el id
 
     char *dir;                                            // Arreglo de caracteres que contendra la direccion del archivo de la tabla hash.
-    dir = malloc(15);                                     // Reserva del espacio de memoria para la direccion
-    bzero(dir,15);                                        // Limpieza del espacio de memoria de la direccion                                                    
+    dir = malloc(25);                                     // Reserva del espacio de memoria para la direccion
+    bzero(dir,25);                                        // Limpieza del espacio de memoria de la direccion                                                    
     char num[3];                                          // Arreglo de caracteres que contiene el codigo hash de la estructura
     strcat(dir,"./hash/");                                // Concatenacion de la cadena "./hash/" a dir
     sprintf(num,"%i",hash);                               // Conversion del numero entero hash a arreglo de caracteres (num)
@@ -96,6 +96,14 @@ int eliminarRegistro(){
 
     fclose(fp);                                           // Cierre del archivo dataDogs.dat
     fclose(newfp);                                        // Cierre del archivo newData.dat
+
+    bzero(dir,25);                                        // Limpieza del apuntador dir
+    strcat(dir,"./historias/");                           // Concatenacion del prefijo que conteiene la ruta a la carpeta de historias clinicas
+    char num2[10];                                        // Declaracion de la variable num2 que contendra el id del registro.
+    sprintf(num2,"%i",id);                                // Conversion del entero a arreglo de caracteres
+    strcat(dir,num2);                                     // Concatenacion de num2 (entero id) a la direccion
+    strcat(dir,".txt");                                   // Concatenacion del sufijo .txt a la ruta del archivo
+    remove(dir);                                          // Eliminacion del archivo de historia clinica (si existe)
 
     free(c);                                              // Se libera el espacio de memoria reservado para c
     free(m);                                              // Se libera el espacio de memoria reservado para m
