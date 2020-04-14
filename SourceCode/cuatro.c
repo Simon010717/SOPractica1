@@ -18,7 +18,7 @@
    -------------------------------------------------------------------/*/
 
 int buscarRegistro(){
-    int hash,size,tid,l,i;                                // Declaracion de variables enteras
+    int hash,size,tid,l,i;                                   // Declaracion de variables enteras
     char tnombre[32];                                        // Declaracion del arreglo de caracteres temporal de la iteracion 
     char nombre[32];                                         // Declaracion del arreglo de caracteres del nombre buscado 
     bzero(tnombre,32); bzero(nombre,32);                     // Limpieza del espacio en memoria 
@@ -54,7 +54,7 @@ int buscarRegistro(){
         fread(tnombre,32,1,fp);                              // Lectura de almacenamiento del nombre del paquete
         for(i=0;i<32;i++){tnombre[i] = tolower(tnombre[i]);} // Iteracion sobre los caracteres del nombre y conversion a minuscula 
         if(strcmp(nombre,tnombre) == 0){                     // Compara el nombre a buscar y el nombre leido
-            printw("   - %i\n",tid);                         // Si coinciden imprime el id leido 
+            printw("- %i ",tid);                             // Si coinciden imprime el id leido 
         }
         fseek(fp,36-sizeof(int)-32,SEEK_CUR);                // Salto al inicio del siguiente paquete
     }

@@ -47,7 +47,8 @@ int hashf(char word[],int l){
     }
 
     h = 1;
-    for(i=0; i<l; i++){ 
+    for(i=0; i<l; i++){
+		h = (p + h*x+(int)word[i])%p;
     }
 
     return h%m;
@@ -82,6 +83,7 @@ int main(){
 
 		bzero(data->nombre,32);
 		strcpy(data->nombre, AllNames[i%NAMES]);
+		//printf("%s",data->nombre);
 
 		sprintf(data->tipo, "Perro");
 
@@ -104,7 +106,8 @@ int main(){
 		strcat(dir,"../hash/");                                      
 		sprintf(num,"%i",hash);                                      
 		strcat(dir,num);                                      
-
+		
+		//printf("%s",dir);
 
 		FILE *fp;                                      
 		fp = fopen(dir,"a");                                      
